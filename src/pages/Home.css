@@ -1,0 +1,10 @@
+.home{
+/* 
+    background-image: url('../assests/image-1.jpeg'); */
+    background-color:blue;
+    margin-left: 250px;
+    margin-right: 50px;
+    background-position: center;
+    text-align: center;
+
+}
