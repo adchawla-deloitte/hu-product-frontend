@@ -1,5 +1,6 @@
 module.exports = {
     entry: __dirname + "/src/index.js",
+    target:  "electron-renderer",
     output: {
         path: __dirname + "/public",
         publicPath: "/assets/",

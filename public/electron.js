@@ -1,15 +1,20 @@
 const path = require('path');
 
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, dialog, ipcMain } = require('electron');
 const isDev = require('electron-is-dev');
+
+require('@electron/remote/main').initialize()
 
 function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1400,
+    height: 1200,
     webPreferences: {
+      preload: path.join(__dirname, './preload.js'),
       nodeIntegration: true,
+      enableRemoteModule: true,
+      contextIsolation: false
     },
   });
 
@@ -45,3 +50,10 @@ app.on('activate', () => {
     createWindow();
   }
 });
+
+ipcMain.on('select-dirs', async (event, arg) => {
+  const result = await dialog.showOpenDialog(mainWindow, {
+    properties: ['openDirectory']
+  })
+  console.log('directories selected', result.filePaths)
+})
