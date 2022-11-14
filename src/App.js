@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Movie from './pages/Movie';
 import Music from './pages/Music';
 import More from './pages/More.js';
+import FolderContent from './pages/FolderContent';
 
 
 function App() {
@@ -20,7 +21,8 @@ function App() {
           <Route path='/' exact component={Home} />
           <Route path='/movies' component={Movie} />
           <Route path='/music' component={Music} />
-           <Route path='/more' component={More}/> 
+          <Route path='/more' component={More}/> 
+          <Route path='/folder' component={FolderContent}/>
         </Switch>
       </Router>
     </>

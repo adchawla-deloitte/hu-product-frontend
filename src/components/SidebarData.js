@@ -39,5 +39,11 @@ export const SidebarData = [
     path: '/support',
     icon: <IoIcons.IoMdHelpCircle />,
     cName: 'nav-text'
+  },
+  {
+    title: 'Folder',
+    path: '/folder',
+    icon:  <AiIcons.AiOutlineFolderOpen />,
+    cName: 'nav-text'
   }
 ];
