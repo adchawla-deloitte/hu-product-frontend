@@ -1,14 +1,43 @@
-import React, { useState } from 'react'; 
+import React, { useState, useEffect } from 'react'; 
+import { parse } from 'node-html-parser';
+
 import './FolderContent.css'
+
+// fetch('http://192.168.29.150:49317/')
+// .then((res)=> res.text())
+// .then((html)=> {
+//     const root = parse(html)
+//     const allUrls = root.getElementsByTagName('a')
+//     console.log(allUrls[0].attributes.href);
+// })
 
 const FolderContent = () => {
     const [contentList, setContent] = useState([])
-    const url = "192.168.29.150:49317"
-    let links = ["Screenshot%20from%202022-11-03%2017-22-46.png","Screenshot%20from%202022-11-03%2017-22-47.png","Screenshot%20from%202022-11-03%2017-22-48.png","Screenshot%20from%202022-11-03%2017-22-51.png"]
+    
+    useEffect(()=>{
+        const url = "10.29.142.109:50091"
+        const getAllUrls = async () => {
+            const allUrls = await fetchUrls(url)
+            allUrls.map((oneUrl)=>{
+                setContent(contentList => [...contentList, "http://"+url+"/"+oneUrl.attributes.href])
+            })
+        }
+        getAllUrls()
+    },[])
+
+    const fetchUrls = async (url) => {
+        const res = await fetch("http://"+url)
+        const html = await res.text()
+        console.log(html);
+        const root = parse(html)
+        const allUrls = root.getElementsByTagName('a')
+        return allUrls
+    }
+
     return (
         <div className='content-container'>
-          {links.map((link)=>(
-            <img src={"http://"+url+"/"+link} />
+          {contentList.map((link)=>(
+            <img key={link} src={link} />
           ))}
         </div>
     )
