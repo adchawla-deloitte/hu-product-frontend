@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaHome,FaBars,}from "react-icons/fa";
 import {BiMovie,BiMusic,BiHelpCircle, BiSearch} from "react-icons/bi";
-import {AiFillCompass} from "react-icons/ai";
+import {AiFillCompass,AiOutlineFolderOpen} from "react-icons/ai";
 import {MdArrowForwardIos} from "react-icons/md";
 import { NavLink } from 'react-router-dom';
 
@@ -46,6 +46,23 @@ const Sidebar = ({children}) => {
             icon:<BiHelpCircle/>
         }
     ]
+
+    const [folderList, setFolder] = useState([])
+
+    useEffect(()=>{
+        const getFolders = async ()=>{
+            const allFolders = await fetchFolders()
+            setFolder(allFolders)
+        }
+        getFolders()
+    },[])
+
+    const fetchFolders = async () => {
+        const res = await fetch('http://localhost:8000/server/directory/')
+        const data = await res.json()
+        return data
+    }
+
     return (
         <div className="container">
            <div style={{width: isOpen ? "200px" : "90px"}} className="sidebar">
@@ -62,6 +79,14 @@ const Sidebar = ({children}) => {
                            <div style={{display: isOpen ? "block" : "none"}} className="link_text">{item.name}</div>
                        </NavLink>
                    ))
+               }
+               {
+                    folderList.map((item)=>(
+                        <NavLink to={`/folder/${item.pk}`} key={item.pk} className="link" activeclassName="active">
+                            <div className='icon'><AiOutlineFolderOpen /></div>
+                            <div style={{display: isOpen ? "block" : "none"}} className="link_text">Folder</div>
+                        </NavLink>  
+                    ))
                }
            </div>
            <main>{children}</main>

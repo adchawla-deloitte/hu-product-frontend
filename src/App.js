@@ -7,6 +7,7 @@ import Music from './pages/Music.js';
 import Movies from './pages/Movies.js';
 import Search from './pages/Search.js';
 import More from './pages/More';
+import FolderContent from './pages/FolderContent'
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/music" element={<Music />} />
           <Route path='/more' element={<More />}/> 
+          <Route path='/folder/:id' element={<FolderContent />}/>
         </Routes>
       </Sidebar>
     </BrowserRouter>
