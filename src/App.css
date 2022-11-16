@@ -1,18 +1,82 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: 'Lato', sans-serif;
+*{
+  margin:0;
+  padding:0;
+  text-decoration: none;
 }
+.container{
+  display:flex;
+  background: linear-gradient(2.87deg, #130B29 9.89%, #5436A9 100%, #5E47A1 100%); 
+  background-color: #111;
+}
+main{
+  width: 100%;
+  padding: 20px;
+}
+.sidebar{
+  background: linear-gradient(2.87deg, #130B29 9.89%, #5436A9 100%, #5E47A1 100%);
+  color: #fff;
+  height: 100vh;
+  width: 250px;
+  transition: all 0.5s;
+  background-color: #111;
 
-.home,
-.music
- {
-  height: 90vh;
-  align-items: center;
-  justify-content: center;
-  font-size: 3rem;
+}
+.top_section{
   display: flex;
+  align-items:center;
+  padding:20px 15px;
 }
+
+.bars{
+  display: flex;
+  font-size: 25px;
+  margin-left: 50px;
+}
+.link{
+  display: flex;
+  color: #fff;
+  padding: 10px 15px;
+  gap: 15px;
+  transition: all 0.5s;
+}
+.link:hover{
+  background:linear-gradient(2.87deg, #130B29 9.89%, #5436A9 100%, #5E47A1 100%);
+  color: #000;
+  transition: all 0.5s;
+}
+.active{
+  background:linear-gradient(2.87deg, #130B29 9.89%, #5436A9 100%, #5E47A1 100%); ;
+  color: #000;
+}
+.icon, .link_text{
+  font-size: 25px;
+}
+
+
+
+.App-header {
+  height: 80px;
+  display: flex;
+   font-size: 50px;
+  color: white;
+  background:linear-gradient(2.87deg, #130B29 9.89%, #5436A9 100%, #5E47A1 100%);
+
+  
+}
+
+.left{
+  flex:50%
+}
+.right{
+  flex:50%
+}
+.logo{
+  padding:  20px;
+}
+
+.rigsea{
+  padding-right: 20px;
+  float: right;
+}
+
+

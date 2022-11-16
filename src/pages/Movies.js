@@ -2,13 +2,11 @@ import React from 'react';
 import Row from '../Row';
 import './Home.css';
 import requests from '../Requests';
-import Banner from '../Banner'
 
-const Home = () => {
+const Movies = () => {
     return (
         <div className='home'>
-            <h1>homepage</h1>
-            <Banner />
+            <h1>Moviespage</h1>
             <Row title="Treanding Now" fetchUrl={requests.fetchTreanding}  isLargeRow={true}/>
             <Row title="Top Rated" fetchUrl={requests.fetchTopRated} />
             <Row title="Action Movies" fetchUrl={requests.fetchActionMovies} />
@@ -22,4 +20,6 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default Movies;
+
+

@@ -1,4 +1,4 @@
-.more{
+.search{
     width: 100%;
     height: 100%;
     color:white;
@@ -8,4 +8,12 @@
     backdrop-filter: blur(12.5px);
     /* Note: backdrop-filter has minimal browser support */
     background-color: #111;
+    text-align: center;
+
+}
+
+.searchbox{
+    border-radius: 0.5em;
+    height: 40px;
+    width: 250px;
 }

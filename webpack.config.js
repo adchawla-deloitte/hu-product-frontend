@@ -14,6 +14,13 @@ module.exports = {
         port: 8080,
     },
     module: {
+        rules: [
+            {
+              test: /\.mjs$/,
+              include: /node_modules/,
+              type: "javascript/auto"
+            }
+          ],
         loaders: [
             {
                 test: /\.(jpg|jpeg|gif|png|ico)$/,

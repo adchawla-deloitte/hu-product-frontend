@@ -1,32 +1,40 @@
 import React from 'react';
-import {useState} from 'react';
 import './App.css';
-import Navibar from './components/Navbar';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Movie from './pages/Movie';
-import Music from './pages/Music';
-import More from './pages/More.js';
-import FolderContent from './pages/FolderContent';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Sidebar from './components/Sidebar';
+import Home from './pages/Home.js';
+import Music from './pages/Music.js';
+import Movies from './pages/Movies.js';
+import Search from './pages/Search.js';
+import More from './pages/More';
 
-
-function App() {
-  const [inactive, setInactive] = useState(false);
+const App = () => {
   return (
-   
     <>
-      <Router>
-        <Navibar/>
-        <Switch>
-          <Route path='/' exact component={Home} />
-          <Route path='/movies' component={Movie} />
-          <Route path='/music' component={Music} />
-          <Route path='/more' component={More}/> 
-          <Route path='/folder' component={FolderContent}/>
-        </Switch>
-      </Router>
+     <div className="App">
+    <header className="App-header">
+      <div class="left">
+        <div className='logo'>LNMS</div>
+        </div>
+     <div class="right">
+     <div className='rigsea'> </div> 
+      </div> 
+    </header>
+  </div> 
+  <BrowserRouter>
+      <Sidebar>
+        <Routes>
+          <Route path='/search' element={<Search />}/>
+          <Route path="/movies" element={<Movies />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/music" element={<Music />} />
+          <Route path='/more' element={<More />}/> 
+        </Routes>
+      </Sidebar>
+    </BrowserRouter>
     </>
+   
   );
-}
+};
 
 export default App;
