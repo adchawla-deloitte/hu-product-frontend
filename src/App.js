@@ -14,10 +14,10 @@ const App = () => {
     <>
      <div className="App">
     <header className="App-header">
-      <div class="left">
+      <div className="left">
         <div className='logo'>LNMS</div>
         </div>
-     <div class="right">
+     <div className="right">
      <div className='rigsea'> </div> 
       </div> 
     </header>

@@ -21,22 +21,27 @@ const FolderContent = () => {
     let dirType = 3
     const params = useParams()
     
-    useEffect(async ()=>{
-        const urlFetch = await fetch(`http://localhost:8000/server/serveDirectory/${params.id}`)
-        const urlJson = await urlFetch.json()
-        const url = urlJson.serverip
-        console.log(url)
-        const dirFetch = await fetch(`http://localhost:8000/server/directory/${params.id}`)
-        const dirJson = await dirFetch.json()
-        dirType = dirJson.dir_type
-        const getAllUrls = async () => {
-            const allUrls = await fetchUrls(url)
-            allUrls.map((oneUrl)=>{
-                setContent(contentList => [...contentList, "http://"+url+"/"+oneUrl.attributes.href])
-            })
+    useEffect(()=>{
+        const effect = async ()=>{
+            setContent([])
+            const urlFetch = await fetch(`http://localhost:8000/server/serveDirectory/${params.id}`)
+            const urlJson = await urlFetch.json()
+            const url = urlJson.serverip
+            console.log(url)
+            const dirFetch = await fetch(`http://localhost:8000/server/directory/${params.id}`)
+            const dirJson = await dirFetch.json()
+            dirType = dirJson.dir_type
+            
+            const getAllUrls = async () => {
+                const allUrls = await fetchUrls(url)
+                allUrls.map((oneUrl)=>{
+                    setContent(contentList => [...contentList, "http://"+url+"/"+oneUrl.attributes.href])
+                })
+            }
+            getAllUrls()
         }
-        getAllUrls()
-    },[])
+        effect()
+    },[params])
 
     const fetchUrls = async (url) => {
         const res = await fetch("http://"+url)
@@ -49,14 +54,11 @@ const FolderContent = () => {
     return (
         <div className='content-container'>
             {contentList.map((link)=>(
-                <>
-                    <p>{link.substr(link.length-3,link.length)==='png'?<ImageCom path={link}></ImageCom>:null}</p>
-                    <p>{link.substr(link.length-3,link.length)==='mp4'?<VideoCom path={link}></VideoCom>:null}</p>
-                    <p>{link.substr(link.length-3,link.length)==='mp3'?<AudioCom path={link}></AudioCom>:null}</p>
-                </>
-            //    <img key={link} src={link} /> 
-            // <video controls key={link} src={link}></video>
-            // <audio controls key={link} src={link}></audio>
+                <div key={link}>
+                    <>{link.substr(link.length-3,link.length)==='png'?<ImageCom path={link}></ImageCom>:null}</>
+                    <>{link.substr(link.length-3,link.length)==='mp4'?<VideoCom path={link}></VideoCom>:null}</>
+                    <>{link.substr(link.length-3,link.length)==='mp3'?<AudioCom path={link}></AudioCom>:null}</>
+                </div>
         ))}
         </div>)
 }
