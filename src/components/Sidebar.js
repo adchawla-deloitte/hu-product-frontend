@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { FaHome,FaBars,}from "react-icons/fa";
-import {BiMovie,BiMusic,BiHelpCircle, BiSearch} from "react-icons/bi";
-import {AiFillCompass,AiOutlineFolderOpen} from "react-icons/ai";
+import {BiMovie,BiMusic,BiHelpCircle, BiSearch, BiImage} from "react-icons/bi";
+import {AiFillCompass,} from "react-icons/ai";
 import {MdArrowForwardIos} from "react-icons/md";
+import {ImImages} from "react-icons/im"
+import {BsCameraVideo} from "react-icons/bs"
 import { NavLink } from 'react-router-dom';
 
 
@@ -47,6 +49,8 @@ const Sidebar = ({children}) => {
         }
     ]
 
+    const FolderIcons = [<BiMovie/>,<BiMusic/>,<BiImage/>]
+
     const [folderList, setFolder] = useState([])
 
     useEffect(()=>{
@@ -63,6 +67,11 @@ const Sidebar = ({children}) => {
         return data
     }
 
+    const folderName = (path)=>{
+        let last = path.lastIndexOf("/")
+        return path.slice(last+1)
+    }
+
     return (
         <div className="container">
            <div style={{width: isOpen ? "200px" : "90px"}} className="sidebar">
@@ -72,19 +81,19 @@ const Sidebar = ({children}) => {
                        <FaBars onClick={toggle}/>
                    </div>
                </div>
-               {
+               {/* {
                    menuItem.map((item, index)=>(
                        <NavLink to={item.path} key={index} className="link" activeclassName="active">
                            <div className="icon">{item.icon}</div>
                            <div style={{display: isOpen ? "block" : "none"}} className="link_text">{item.name}</div>
                        </NavLink>
                    ))
-               }
+               } */}
                {
                     folderList.map((item)=>(
                         <NavLink to={`/folder/${item.pk}`} key={item.pk} className="link" activeclassName="active">
-                            <div className='icon'><AiOutlineFolderOpen /></div>
-                            <div style={{display: isOpen ? "block" : "none"}} className="link_text">Folder</div>
+                            <div className='icon'>{FolderIcons[item.dir_type-1]}</div>
+                            <div style={{display: isOpen ? "block" : "none"}} className="link_text">{folderName(item.dir_name)}</div>
                         </NavLink>  
                     ))
                }
